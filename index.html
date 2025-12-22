@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Latające okienko</title>
+
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: #111;
+        font-family: Arial, sans-serif;
+    }
+
+    #box {
+        position: fixed;
+        width: 120px;
+        height: 80px;
+        background: #00aaff;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        font-weight: bold;
+        user-select: none;
+    }
+</style>
+</head>
+<body>
+
+<div id="box">HELLO</div>
+
+<script>
+const box = document.getElementById("box");
+
+let x = 100;
+let y = 100;
+let dx = 3;
+let dy = 3;
+
+const boxWidth = 120;
+const boxHeight = 80;
+
+function move() {
+    x += dx;
+    y += dy;
+
+    if (x <= 0 || x + boxWidth >= window.innerWidth) dx *= -1;
+    if (y <= 0 || y + boxHeight >= window.innerHeight) dy *= -1;
+
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+
+    requestAnimationFrame(move);
+}
+
+move();
+</script>
+
+</body>
+</html>
