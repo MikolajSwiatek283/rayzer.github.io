@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Latające okienko</title>
-
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background: #111;
-        font-family: Arial, sans-serif;
-    }
-
-    #box {
-        position: fixed;
-        width: 120px;
-        height: 80px;
-        background: #00aaff;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        font-weight: bold;
-        user-select: none;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>Latające Okno</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-<div id="box">HELLO</div>
+    <h1>Generator Latającego Okna</h1>
+    <p>Kliknij przycisk, aby otworzyć okno (pamiętaj o zezwoleniu na pop-upy!).</p>
+    <button onclick="stworzLatajaceOkno()">Uruchom okno</button>
 
-<script>
-const box = document.getElementById("box");
+    <script>
+        function stworzLatajaceOkno() {
+            // 1. Otwieramy nowe, małe okno
+            const szerokosc = 300;
+            const wysokosc = 200;
+            let okno = window.open("", "LatajaceOkno", `width=${szerokosc},height=${wysokosc}`);
 
-let x = 100;
-let y = 100;
-let dx = 3;
-let dy = 3;
+            if (!okno) {
+                alert("Zablokowano wyskakujące okno! Zmień ustawienia przeglądarki.");
+                return;
+            }
 
-const boxWidth = 120;
-const boxHeight = 80;
+            // Dodajemy treść do nowego okna
+            okno.document.write("<h3>Lecę! 🚀</h3><p>Zamknij mnie, aby przestać.</p>");
 
-function move() {
-    x += dx;
-    y += dy;
+            // 2. Ustawiamy parametry ruchu
+            let dx = 5; // prędkość w poziomie
+            let dy = 5; // prędkość w pionie
 
-    if (x <= 0 || x + boxWidth >= window.innerWidth) dx *= -1;
-    if (y <= 0 || y + boxHeight >= window.innerHeight) dy *= -1;
+            // 3. Funkcja animująca ruch
+            const animuj = () => {
+                if (okno.closed) {
+                    clearInterval(interval);
+                    return;
+                }
 
-    box.style.left = x + "px";
-    box.style.top = y + "px";
+                // Sprawdzamy granice ekranu
+                const x = okno.screenX;
+                const y = okno.screenY;
+                const maxX = screen.availWidth - szerokosc;
+                const maxY = screen.availHeight - wysokosc;
 
-    requestAnimationFrame(move);
-}
+                // Odbijanie od krawędzi
+                if (x <= 0 || x >= maxX) dx = -dx;
+                if (y <= 0 || y >= maxY) dy = -dy;
 
-move();
-</script>
+                // Przesunięcie okna
+                okno.moveBy(dx, dy);
+            };
+
+            // Uruchomienie pętli (co 10 milisekund)
+            const intervall = setInterval(animuj, 10);
+        }
+    </script>
 
 </body>
 </html>
