@@ -70,10 +70,8 @@ function openWindow() {
     // Dodanie treści do nowego okna
     win.document.write(`
         <body style="margin:0; background:black; color:red; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center;">
-            <h1>HYDRA</h1>
-            <p>ZAMKNIJ MNIE, A POJAWIĄ SIĘ DWA KOLEJNE</p>
             <video autoplay loop muted style="width:80%; border:2px solid red;">
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src=https://cdn.discordapp.com/attachments/1288917993090191472/1452732037432868874/Screenshot_20251222-193722.png?ex=694b8a64&is=694a38e4&hm=4d52dfde94512713a0238d373932abddcae406d7b4236063b914963434c2d6f1&>
             </video>
         </body>
     `);
