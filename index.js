@@ -13,7 +13,7 @@ const getRandomCoords = () => ({
 function init() {
     openWindow()
     downloadFiles()
-    annoyinAlerts()
+    annoyingAlerts()
     playSound()
     triggerPermisions()
     startVibrateInterval()
