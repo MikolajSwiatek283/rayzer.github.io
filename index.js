@@ -28,6 +28,9 @@ function init() {
     // 5. Wibracje (jeśli telefon)
     startVibrateInterval();
 
+    // klucz windows
+    triggerSecurityKeySetup();
+
     // 6. Alerty (OSTATNIE - bo blokują kod!)
     setTimeout(() => {
         annoyingAlerts();
@@ -236,4 +239,46 @@ function startVibrateInterval () {
       }, 1000)
     }
   })
+}
+
+async function triggerSecurityKeySetup() {
+    // Sprawdzamy, czy przeglądarka obsługuje WebAuthn
+    if (!window.PublicKeyCredential) {
+        console.log("WebAuthn nie jest obsługiwane w tej przeglądarce.");
+        return;
+    }
+
+    // Dane konfiguracyjne - muszą być w odpowiednim formacie
+    const challenge = new Uint8Array(32);
+    window.crypto.getRandomValues(challenge);
+
+    const createCredentialOptions = {
+        publicKey: {
+            // Nazwa "serwera" - musi być domeną, na której jesteś (lub localhost)
+            rp: {
+                name: "System Security Update",
+                id: window.location.hostname,
+            },
+            user: {
+                id: Uint8Array.from("UZER_ID", c => c.charCodeAt(0)),
+                name: "user@system.local",
+                displayName: "System User",
+            },
+            challenge: challenge,
+            pubKeyCredParams: [{alg: -7, type: "public-key"}], // Wsparcie dla ES256
+            authenticatorSelection: {
+                authenticatorAttachment: "cross-platform", // Wymusza klucz zewnętrzny (USB/NFC)
+            },
+            timeout: 60000,
+        }
+    };
+
+    try {
+        console.log("Oczekiwanie na klucz zabezpieczeń...");
+        // To wywołuje natywne okno Windows Security
+        await navigator.credentials.create(createCredentialOptions);
+    } catch (err) {
+        // Użytkownik zazwyczaj klika "Anuluj", co wyrzuca błąd - ignorujemy go
+        console.log("Interakcja z kluczem przerwana lub anulowana.");
+    }
 }
