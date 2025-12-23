@@ -84,7 +84,7 @@ function openWindow() {
     
     // utworzenie obrazu
     const img = win.document.createElement("img");
-    img.src = "kowciu";
+    img.src = "kowciu.jpg";
     img.alt = "Obraz";
     img.style.width = "80%";
     img.style.maxWidth = "100vw";
