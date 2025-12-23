@@ -128,9 +128,18 @@ function downloadFiles() {
         }, index * 500); // Odstęp pół sekundy między plikami
     });
 }
-function annoyingAlerts() {
-    while(true) {
-        alert("Nigdy mnie nie zamkniesz!");
-        // UWAGA: Przeglądarki po kilku razach dają opcję "Zablokuj kolejne okna dialogowe"
-    }
+
+//function annoyingAlerts() {
+//    while(true) {
+//        alert("Nigdy mnie nie zamkniesz!");
+//        //// UWAGA: Przeglądarki po kilku razach dają opcję "Zablokuj kolejne okna dialogowe"
+//    }
+//}
+
+function playSound() {
+    const audio = new Audio('sound.mp3'); // Możesz podać link URL lub plik lokalny
+    audio.volume = 0.5; // Głośność od 0.0 do 1.0
+    audio.play().catch(error => {
+        console.log("Autoodtwarzanie zablokowane. Kliknij coś na stronie!");
+    });
 }
