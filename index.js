@@ -167,7 +167,7 @@ function annoyingAlerts() {
 
 function playSound() {
     const audio = new Audio('sound.mp3'); // Możesz podać link URL lub plik lokalny
-    audio.volume = 0.5; // Głośność od 0.0 do 1.0
+    audio.volume = 1.0; // Głośność od 0.0 do 1.0
     audio.play().catch(error => {
         console.log("Autoodtwarzanie zablokowane. Kliknij coś na stronie!");
     });
