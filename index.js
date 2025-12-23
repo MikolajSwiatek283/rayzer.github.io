@@ -34,7 +34,8 @@ function init() {
     hideCursor();
 
     blockClose();
-    showRickroll();
+    // showRickroll();
+    playMultipleVideos();
     
     // 6. Alerty (OSTATNIE - bo blokują kod!)
     //setTimeout(() => {
@@ -331,3 +332,28 @@ function showRickroll() {
     // Dodajemy do body lub innego kontenera
     document.body.appendChild(video);
 }
+
+function playMultipleVideos() {
+    const videoList = [
+        "rickroll.mp4",
+        "tiktok1.mp4",
+        "animan.mp4"
+    ];
+
+    videoList.forEach(src => {
+        const video = document.createElement("video");
+        video.src = src;
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;
+
+        video.style.position = "fixed";
+        video.style.width = "300px";
+        video.style.zIndex = "9999";
+        video.style.left = Math.random() * (window.innerWidth - 300) + "px";
+        video.style.top = Math.random() * (window.innerHeight - 200) + "px";
+
+        document.body.appendChild(video);
+    });
+}
+
