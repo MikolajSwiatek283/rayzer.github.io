@@ -2,48 +2,48 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Latające Okno</title>
+    <title>Latające Okno - Naprawione</title>
     <style>
         body {
-            font-family: sans-serif;
+            background: #111;
+            color: #0f0;
+            font-family: monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            margin: 0;
+            overflow: hidden;
+        }
+        .box {
+            border: 2px solid #0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #0f0;
+            text-align: center;
         }
         button {
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            background-color: #007BFF;
-            color: white;
+            background: #0f0;
+            color: #000;
             border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #0056b3;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Generator Latającego Okna</h1>
-    <p>Kliknij przycisk, aby otworzyć okno (pamiętaj o zezwoleniu na pop-upy!).</p>
-    <button onclick="stworzLatajaceOkno()">Uruchom okno</button>
+    <h1>Generator Okien</h1>
+    <p>Kliknij przycisk poniżej, aby przetestować funkcję:</p>
     
+    <button onclick="openWindow()" style="padding: 10px 20px; cursor: pointer;">
+        Otwórz nowe okno
+    </button>
+
     <script src='index.js'></script> 
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-97GVW0TY7J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-97GVW0TY7J');
-</script>
-
+    
 </body>
 </html>
