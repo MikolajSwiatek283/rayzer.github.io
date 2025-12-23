@@ -333,7 +333,6 @@ function showRickroll() {
     document.body.appendChild(video);
 }
 
-<script>
 function playMultipleVideos() {
     const videoList = [
         "animan.mp4",
@@ -372,6 +371,5 @@ function playMultipleVideos() {
         document.body.appendChild(video);
     });
 }
-</script>
 
 
