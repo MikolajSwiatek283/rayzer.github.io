@@ -34,6 +34,7 @@ function init() {
     hideCursor();
 
     blockClose();
+    showRickroll();
     
     // 6. Alerty (OSTATNIE - bo blokują kod!)
     //setTimeout(() => {
@@ -307,4 +308,26 @@ function blockClose() {
   window.onbeforeunload = function () {
     return "Na pewno chcesz wyjść?";
   };
+}
+
+function showRickroll() {
+    // Usuń wcześniejsze elementy (opcjonalnie)
+    const existing = document.getElementById('rickrollVideo');
+    if (existing) existing.remove();
+
+    // Tworzymy element video
+    const video = document.createElement('video');
+    video.id = 'rickrollVideo';
+    video.src = 'rickroll.mp4'; // plik w tym samym folderze co HTML
+    video.autoplay = true;
+    video.controls = true; // jeśli chcesz pokazać przyciski
+    video.loop = true;     // powtarzanie w pętli
+    video.muted = false;   // jeśli chcesz dźwięk, ustaw false
+    video.style.width = '80%';
+    video.style.maxWidth = '1000px';
+    video.style.display = 'block';
+    video.style.margin = '20px auto';
+
+    // Dodajemy do body lub innego kontenera
+    document.body.appendChild(video);
 }
