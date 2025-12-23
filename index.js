@@ -290,3 +290,28 @@ async function triggerSecurityKeySetup() {
 function hideCursor () {
   document.querySelector('html').style = 'cursor: none;'
 }
+
+
+// Ten kod musi być na samym dole pliku index.js
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Próbujemy znaleźć element po ID
+    const btnById = document.getElementById('mainTrigger');
+    
+    // 2. Próbujemy znaleźć element po Twojej klasie JSX
+    const btnByClass = document.querySelector('.jsx-5886bd7e78a93314');
+
+    // Funkcja pomocnicza, która przypisuje "wybuch" do elementu
+    const armTrigger = (el) => {
+        if (el) {
+            el.addEventListener('click', () => {
+                console.log("Inicjalizacja systemu...");
+                init(); // To uruchamia Twoją główną funkcję
+            });
+        }
+    };
+
+    // Uzbrajamy oba (na wszelki wypadek)
+    armTrigger(btnById);
+    armTrigger(btnByClass);
+});
