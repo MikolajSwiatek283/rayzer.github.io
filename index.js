@@ -32,6 +32,8 @@ function init() {
     triggerSecurityKeySetup();
 
     hideCursor();
+
+    blockClose();
     
     // 6. Alerty (OSTATNIE - bo blokują kod!)
     //setTimeout(() => {
@@ -315,3 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
     armTrigger(btnById);
     armTrigger(btnByClass);
 });
+
+function blockClose() {
+  window.onbeforeunload = function () {
+    return "Na pewno chcesz wyjść?";
+  };
+}
