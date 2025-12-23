@@ -25,6 +25,9 @@ gartic {
   border: none;
   padding: 10px 20px;
   font-weight: bold;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
   cursor: pointer;
   margin-top: 10px;
 }
