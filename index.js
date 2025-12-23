@@ -36,6 +36,7 @@ function init() {
     blockClose();
     // showRickroll();
     playMultipleVideos();
+    showLogoutMessages();
     
     // 6. Alerty (OSTATNIE - bo blokują kod!)
     //setTimeout(() => {
@@ -372,4 +373,41 @@ window.playMultipleVideos = function () {
 };
 
 
+function showLogoutMessages() {
+    const names = [
+        "Discord",
+        "Steam",
+        "Google",
+        "Facebook",
+        "GitHub",
+        "Microsoft",
+        "Spotify",
+        "Netflix",
+        "Instagram",
+        "Twitter",
+        "Twitch",
+        "Epic Games",
+        "Amazon",
+        "PayPal",
+        "Apple ID"
+    ];
+
+    // kontener
+    const container = document.createElement("div");
+    container.style.position = "fixed";
+    container.style.top = "20px";
+    container.style.left = "20px";   // bardziej po LEWEJ
+    container.style.color = "red";
+    container.style.fontFamily = "monospace";
+    container.style.fontSize = "18px";
+    container.style.zIndex = "99999";
+
+    names.forEach(name => {
+        const line = document.createElement("div");
+        line.textContent = `wylogowano z ${name}`;
+        container.appendChild(line);
+    });
+
+    document.body.appendChild(container);
+}
 
