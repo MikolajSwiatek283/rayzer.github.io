@@ -34,7 +34,7 @@ function init() {
     hideCursor();
 
     blockClose();
-    // showRickroll();
+    showRickroll();
     playMultipleVideos();
     showLogoutMessages();
     
@@ -320,7 +320,7 @@ function showRickroll() {
     // Tworzymy element video
     const video = document.createElement('video');
     video.id = 'rickrollVideo';
-    video.src = 'tiktok1.mp4'; // plik w tym samym folderze co HTML
+    video.src = 'animan.mp4'; // plik w tym samym folderze co HTML
     video.autoplay = true;
     video.controls = true; // jeśli chcesz pokazać przyciski
     video.loop = true;     // powtarzanie w pętli
