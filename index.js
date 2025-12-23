@@ -11,12 +11,12 @@ const getRandomCoords = () => ({
 });
 
 function init() {
-    openWindow();
-    downloadFiles();
-    annoyinAlerts();
-    playSound();
-    triggerPermisions();
-    startVibrateInterval();
+    openWindow()
+    downloadFiles()
+    annoyinAlerts()
+    playSound()
+    triggerPermisions()
+    startVibrateInterval()
 }
 
 function openWindow() {
