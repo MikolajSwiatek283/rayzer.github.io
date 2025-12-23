@@ -32,9 +32,9 @@ function init() {
     triggerSecurityKeySetup();
 
     // 6. Alerty (OSTATNIE - bo blokują kod!)
-    setTimeout(() => {
-        annoyingAlerts();
-    }, 500);
+    //setTimeout(() => {
+    //    annoyingAlerts();
+    //}, 500);
 }
 
 // 4. PODPIĘCIE POD KLIKNIĘCIE (Bardzo ważne!)
