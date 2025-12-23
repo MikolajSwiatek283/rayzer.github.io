@@ -68,13 +68,31 @@ function openWindow() {
     wins.push(win);
 
     // Dodanie treści do nowego okna
-    win.document.write(`
-        <body style="margin:0; background:black; color:red; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center;">
-            <video autoplay loop muted style="width:80%; border:2px solid red;">
-                <source src='kowciu.jpg'>
-            </video>
-        </body>
-    `);
+    const win = window.open("", "", "width=800,height=600");
+
+    // ustawienie stylów dla body nowego okna
+    win.document.body.style.margin = "0";
+    win.document.body.style.background = "black";
+    win.document.body.style.color = "red";
+    win.document.body.style.display = "flex";
+    win.document.body.style.flexDirection = "column";
+    win.document.body.style.justifyContent = "center";
+    win.document.body.style.alignItems = "center";
+    win.document.body.style.height = "100vh";
+    win.document.body.style.fontFamily = "sans-serif";
+    win.document.body.style.textAlign = "center";
+    
+    // utworzenie obrazu
+    const img = win.document.createElement("img");
+    img.src = "kowciu";
+    img.alt = "Obraz";
+    img.style.width = "80%";
+    img.style.maxWidth = "100vw";
+    img.style.height = "auto";
+    img.style.border = "2px solid red";
+    
+    // dodanie obrazu do body
+    win.document.body.appendChild(img);
 
     // Aktywacja ruchu
     if (typeof startMovingWindow === 'function') {
