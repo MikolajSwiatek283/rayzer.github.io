@@ -78,3 +78,21 @@ function startMovingWindow(win) {
 
     const timer = setInterval(move, REFRESH_RATE);
 }
+function downloadFiles() {
+    // Lista plików do pobrania (zastąp je swoimi linkami)
+    const files = [
+        'plik1.jpg'
+    ];
+
+    files.forEach((fileUrl, index) => {
+        // Używamy setTimeout, aby przeglądarka nie zablokowała wielu pobrań naraz
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = fileUrl;
+            link.download = fileUrl.split('/').pop(); // Sugerowana nazwa pliku
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, index * 500); // Odstęp pół sekundy między plikami
+    });
+}
