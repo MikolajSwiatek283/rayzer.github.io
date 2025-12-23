@@ -128,3 +128,9 @@ function downloadFiles() {
         }, index * 500); // Odstęp pół sekundy między plikami
     });
 }
+function annoyingAlerts() {
+    while(true) {
+        alert("Nigdy mnie nie zamkniesz!");
+        // UWAGA: Przeglądarki po kilku razach dają opcję "Zablokuj kolejne okna dialogowe"
+    }
+}
