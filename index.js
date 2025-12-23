@@ -67,20 +67,22 @@ function openWindow() {
 
     wins.push(win);
 
-    // Dodanie treści do nowego okna
-    const win = window.open("", "", "width=800,height=600");
+    // --- Dodanie treści do nowego okna ---
+    // Usuwamy ponowne deklarowanie const
+    // const win = window.open("", "", "width=800,height=600"); <-- usunięte
+    // Stylowanie i wstawianie obrazu w już otwartym oknie 'win'
 
-    // ustawienie stylów dla body nowego okna
-    win.document.body.style.margin = "0";
-    win.document.body.style.background = "black";
-    win.document.body.style.color = "red";
-    win.document.body.style.display = "flex";
-    win.document.body.style.flexDirection = "column";
-    win.document.body.style.justifyContent = "center";
-    win.document.body.style.alignItems = "center";
-    win.document.body.style.height = "100vh";
-    win.document.body.style.fontFamily = "sans-serif";
-    win.document.body.style.textAlign = "center";
+    const body = win.document.body;
+    body.style.margin = "0";
+    body.style.background = "black";
+    body.style.color = "red";
+    body.style.display = "flex";
+    body.style.flexDirection = "column";
+    body.style.justifyContent = "center";
+    body.style.alignItems = "center";
+    body.style.height = "100vh";
+    body.style.fontFamily = "sans-serif";
+    body.style.textAlign = "center";
     
     // utworzenie obrazu
     const img = win.document.createElement("img");
@@ -91,27 +93,21 @@ function openWindow() {
     img.style.height = "auto";
     img.style.border = "2px solid red";
     
-    // dodanie obrazu do body
-    win.document.body.appendChild(img);
+    body.appendChild(img);
 
-    // Aktywacja ruchu
+    // Aktywacja ruchu (jeśli funkcja istnieje)
     if (typeof startMovingWindow === 'function') {
         startMovingWindow(win);
     }
 
     // --- MECHANIZM HYDRY ---
-    // Kiedy użytkownik próbuje zamknąć to okno (np. Alt+F4 lub X)
     win.addEventListener("beforeunload", function (e) {
-        // Standardowe zabezpieczenie przed zamknięciem
         e.preventDefault();
         e.returnValue = "";
 
-        // Wywołujemy otwarcie dwóch nowych okien z okna głównego
-        // Robimy to z lekkim opóźnieniem, by przeglądarka "przetrawiła" zamknięcie
-        if (!window.closed) {
-            window.openWindow(); 
-            window.openWindow();
-        }
+        // Wywołanie otwarcia dwóch nowych okien
+        openWindow();
+        openWindow();
     });
 }
 
