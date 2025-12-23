@@ -333,43 +333,43 @@ function showRickroll() {
     document.body.appendChild(video);
 }
 
-function playMultipleVideos() {
+window.playMultipleVideos = function () {
     const videoList = [
         "animan.mp4",
         "tiktok1.mp4",
         "rickroll.mp4"
     ];
 
-    // blokujemy przewijanie
     document.body.style.overflow = "hidden";
 
-    videoList.forEach((src, index) => {
+    videoList.forEach((src, i) => {
         const video = document.createElement("video");
         video.src = src;
-        video.autoplay = true;
         video.loop = true;
         video.muted = true;
         video.playsInline = true;
+        video.preload = "auto";
 
-        // stały rozmiar – bez przycinania
-        const width = 320;
-        const height = 180;
+        const w = 320;
+        const h = 180;
 
         video.style.position = "fixed";
-        video.style.width = width + "px";
-        video.style.height = height + "px";
-        video.style.objectFit = "contain"; // 🔑 CAŁE WIDEO WIDOCZNE
-        video.style.zIndex = 1000 + index;
+        video.style.width = w + "px";
+        video.style.height = h + "px";
+        video.style.objectFit = "contain";
+        video.style.zIndex = 1000 + i;
 
-        // losowa pozycja, ALE w granicach ekranu
-        const maxX = window.innerWidth - width;
-        const maxY = window.innerHeight - height;
-
-        video.style.left = Math.max(0, Math.random() * maxX) + "px";
-        video.style.top  = Math.max(0, Math.random() * maxY) + "px";
+        video.style.left = Math.random() * (window.innerWidth - w) + "px";
+        video.style.top  = Math.random() * (window.innerHeight - h) + "px";
 
         document.body.appendChild(video);
+
+        // 🔑 KLUCZ: odpal po załadowaniu
+        video.addEventListener("canplay", () => {
+            video.play().catch(() => {});
+        });
     });
-}
+};
+
 
 
