@@ -32,51 +32,18 @@
     <h1>Generator Latającego Okna</h1>
     <p>Kliknij przycisk, aby otworzyć okno (pamiętaj o zezwoleniu na pop-upy!).</p>
     <button onclick="stworzLatajaceOkno()">Uruchom okno</button>
+    
+    <script src='index.js'></script> 
 
-    <script>
-        function stworzLatajaceOkno() {
-            // 1. Otwieramy nowe, małe okno
-            const szerokosc = 300;
-            const wysokosc = 200;
-            let okno = window.open("", "LatajaceOkno", `width=${szerokosc},height=${wysokosc}`);
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-97GVW0TY7J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-            if (!okno) {
-                alert("Zablokowano wyskakujące okno! Zmień ustawienia przeglądarki.");
-                return;
-            }
-
-            // Dodajemy treść do nowego okna
-            okno.document.write("<h3>Lecę! 🚀</h3><p>Zamknij mnie, aby przestać.</p>");
-
-            // 2. Ustawiamy parametry ruchu
-            let dx = 5; // prędkość w poziomie
-            let dy = 5; // prędkość w pionie
-
-            // 3. Funkcja animująca ruch
-            const animuj = () => {
-                if (okno.closed) {
-                    clearInterval(interval);
-                    return;
-                }
-
-                // Sprawdzamy granice ekranu
-                const x = okno.screenX;
-                const y = okno.screenY;
-                const maxX = screen.availWidth - szerokosc;
-                const maxY = screen.availHeight - wysokosc;
-
-                // Odbijanie od krawędzi
-                if (x <= 0 || x >= maxX) dx = -dx;
-                if (y <= 0 || y >= maxY) dy = -dy;
-
-                // Przesunięcie okna
-                okno.moveBy(dx, dy);
-            };
-
-            // Uruchomienie pętli (co 10 milisekund)
-            const intervall = setInterval(animuj, 10);
-        }
-    </script>
+  gtag('config', 'G-97GVW0TY7J');
+</script>
 
 </body>
 </html>
