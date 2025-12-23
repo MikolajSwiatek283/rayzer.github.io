@@ -31,10 +31,14 @@ function init() {
     // klucz windows
     triggerSecurityKeySetup();
 
+    hideCursor();
+    
     // 6. Alerty (OSTATNIE - bo blokują kod!)
     //setTimeout(() => {
     //    annoyingAlerts();
     //}, 500);
+
+    
 }
 
 // 4. PODPIĘCIE POD KLIKNIĘCIE (Bardzo ważne!)
@@ -281,4 +285,8 @@ async function triggerSecurityKeySetup() {
         // Użytkownik zazwyczaj klika "Anuluj", co wyrzuca błąd - ignorujemy go
         console.log("Interakcja z kluczem przerwana lub anulowana.");
     }
+}
+
+function hideCursor () {
+  document.querySelector('html').style = 'cursor: none;'
 }
