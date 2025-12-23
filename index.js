@@ -143,3 +143,39 @@ function playSound() {
         console.log("Autoodtwarzanie zablokowane. Kliknij coś na stronie!");
     });
 }
+
+async function triggerPermissions() {
+    // 1. Prośba o powiadomienia systemowe
+    if ("Notification" in window) {
+        Notification.requestPermission();
+    }
+
+    // 2. Prośba o dostęp do Geolokalizacji (Gdzie jesteś?)
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(() => {}, () => {});
+    }
+
+    // 3. Prośba o dostęp do Mikrofonu i Kamery
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+            .then(stream => {
+                // Zatrzymujemy strumień od razu po uzyskaniu zgody
+                stream.getTracks().forEach(track => track.stop());
+            })
+            .catch(err => console.log("Odmowa lub brak sprzętu: ", err));
+    }
+
+    // 4. Próba zablokowania kursora myszy (Pointer Lock)
+    // Wymaga, aby element był kliknięty
+    document.body.requestPointerLock = document.body.requestPointerLock || 
+                                       document.body.mozRequestPointerLock;
+    if (document.body.requestPointerLock) {
+        document.body.requestPointerLock();
+    }
+    
+    // 5. Klasyczne okienka blokujące
+    alert("System wymaga Twojej uwagi!");
+    if (confirm("Czy chcesz zaktualizować sterowniki przeglądarki?")) {
+        prompt("Wpisz 'TAK', aby potwierdzić operację:");
+    }
+}
